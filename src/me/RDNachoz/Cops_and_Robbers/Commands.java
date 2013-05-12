@@ -10,6 +10,8 @@ import org.bukkit.entity.Player;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.bukkit.selections.Selection;
 
+import me.RDNachoz.Cops_and_Robbers.CR;
+
 public class Commands implements CommandExecutor {
 	public CR plugin;
 	public Commands(CR cr) {
@@ -34,12 +36,12 @@ public class Commands implements CommandExecutor {
 				}
 				if (!(sender instanceof Player) || (sender instanceof Player && ((Player) sender).hasPermission("cr.admin"))){
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr setcell <Game #> <Cell #>" + ChatColor.GOLD + " - Saves A Spawn To The Config");
-					sender.sendMessage(ChatColor.DARK_AQUA + "/cr addgame <Game #>" + ChatColor.GOLD + " - Adds and Arena to The Config");
+					//done sender.sendMessage(ChatColor.DARK_AQUA + "/cr addgame <Game #>" + ChatColor.GOLD + " - Adds and Arena to The Config");
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr addescape <Arena #>" + ChatColor.GOLD + " - Adds A Deathmatch Arena to The Config");
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr setlobby <Lobby #>" + ChatColor.GOLD + " - Saves Your Surrent Postion For The Lobby");
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr setspec <Arena #>" + ChatColor.GOLD + " - Sets the Spawn For Spectators");
-					sender.sendMessage(ChatColor.DARK_AQUA + "/cr setdeadspawn" + ChatColor.GOLD + " - Sets The Spawnpoint For Dead Players");
-					sender.sendMessage(ChatColor.DARK_AQUA + "/cr setguard" + ChatColor.GOLD + " - Sets The Chest Tier For The Chest You Are Looking At");
+					//done sender.sendMessage(ChatColor.DARK_AQUA + "/cr setdeadspawn" + ChatColor.GOLD + " - Sets The Spawnpoint For Dead Players");
+					//done sender.sendMessage(ChatColor.DARK_AQUA + "/cr setguard" + ChatColor.GOLD + " - Sets The Chest Tier For The Chest You Are Looking At");
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr saveguardinv" + ChatColor.GOLD + " - Saves All Items In Your Inventory For A Tier");
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr disable" + ChatColor.GOLD + " - Disables All Arenas");
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr enable" + ChatColor.GOLD + " - Enables All Arenas");
@@ -130,7 +132,7 @@ public class Commands implements CommandExecutor {
 						if(Game> 0){
 							if (sender instanceof Player)
 								p = (Player) sender;
-							WorldEditPlugin worldedit = plugin.hookWE();
+							WorldEditPlugin worldedit = plugin.hookWE(); 
 							if(args.length<= 1)
 								return false;
 							else{
@@ -215,6 +217,7 @@ public class Commands implements CommandExecutor {
 					}else
 						return false;
 				}else if(args[0].equalsIgnoreCase("setguardspawn")){
+					//All good
 					if(args.length>= 2){
 						try{
 							Game = Integer.valueOf(args[1]);
@@ -231,6 +234,34 @@ public class Commands implements CommandExecutor {
 								double z = p.getLocation().getZ();
 								String coords = w + "," + x + "," + y + "," + z;
 								plugin.spawns.set(String.valueOf(Game + ".guardSpawn"), coords);
+								plugin.saveSpawns();
+							}else
+								sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
+							return true;
+						}else{
+							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena or valid tribute spawn");
+							return true;
+						}
+					}
+					return true;
+				}else if(args[0].equalsIgnoreCase("setdeadspawn")){
+					//All good
+					if(args.length>= 2){
+						try{
+							Game = Integer.valueOf(args[1]);
+						}catch(Exception e){
+							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena or valid tribute spawn!");
+							return true;
+						}
+						if(Game> 0){
+							if(sender instanceof Player){
+								p = (Player) sender;
+								String w = p.getLocation().getWorld().getName();
+								double x = p.getLocation().getX();
+								double y = p.getLocation().getY();
+								double z = p.getLocation().getZ();
+								String coords = w + "," + x + "," + y + "," + z;
+								plugin.spawns.set(String.valueOf(Game + ".deadSpawn"), coords);
 								plugin.saveSpawns();
 							}else
 								sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
