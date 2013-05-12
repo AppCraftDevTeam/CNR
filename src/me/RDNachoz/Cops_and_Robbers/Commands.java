@@ -215,15 +215,14 @@ public class Commands implements CommandExecutor {
 					}else
 						return false;
 				}else if(args[0].equalsIgnoreCase("setguardspawn")){
-					if(args.length>= 3){
-						int Spawn = 0;
+					if(args.length>= 2){
 						try{
 							Game = Integer.valueOf(args[1]);
 						}catch(Exception e){
 							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena or valid tribute spawn!");
 							return true;
 						}
-						if(Game> 0 || Spawn> 0){
+						if(Game> 0){
 							if(sender instanceof Player){
 								p = (Player) sender;
 								String w = p.getLocation().getWorld().getName();
@@ -231,7 +230,7 @@ public class Commands implements CommandExecutor {
 								double y = p.getLocation().getY();
 								double z = p.getLocation().getZ();
 								String coords = w + "," + x + "," + y + "," + z;
-								plugin.spawns.set(String.valueOf(Game + "." + Spawn), coords);
+								plugin.spawns.set(String.valueOf(Game + ".guardSpawn"), coords);
 								plugin.saveSpawns();
 							}else
 								sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
