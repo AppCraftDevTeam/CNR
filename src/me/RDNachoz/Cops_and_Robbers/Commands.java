@@ -1,10 +1,14 @@
 package me.RDNachoz.Cops_and_Robbers;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import com.sk89q.worldedit.bukkit.WorldEditPlugin;
+import com.sk89q.worldedit.bukkit.selections.Selection;
 
 public class Commands implements CommandExecutor {
 	public CR plugin;
@@ -30,7 +34,7 @@ public class Commands implements CommandExecutor {
 				}
 				if (!(sender instanceof Player) || (sender instanceof Player && ((Player) sender).hasPermission("cr.admin"))){
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr setcell <Game #> <Cell #>" + ChatColor.GOLD + " - Saves A Spawn To The Config");
-					sender.sendMessage(ChatColor.DARK_AQUA + "/cr addgame <game #>" + ChatColor.GOLD + " - Adds and Arena to The Config");
+					sender.sendMessage(ChatColor.DARK_AQUA + "/cr addgame <Game #>" + ChatColor.GOLD + " - Adds and Arena to The Config");
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr addescape <Arena #>" + ChatColor.GOLD + " - Adds A Deathmatch Arena to The Config");
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr setlobby <Lobby #>" + ChatColor.GOLD + " - Saves Your Surrent Postion For The Lobby");
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr setspec <Arena #>" + ChatColor.GOLD + " - Sets the Spawn For Spectators");
@@ -111,6 +115,49 @@ public class Commands implements CommandExecutor {
 							return true;
 						}else{
 							sender.sendMessage(ChatColor.DARK_AQUA + "[HG]" + ChatColor.RED + " You Silly! That's Not An Arena!");
+							return true;
+						}
+					}else
+						return false;
+				}else if(args[0].equalsIgnoreCase("addarena")){
+					if(args.length>= 2){
+						try{
+							Game = Integer.valueOf(args[1]);
+						}catch(Exception e){
+							sender.sendMessage(ChatColor.DARK_AQUA + "[HG]" + ChatColor.RED + " You Silly! That's Not A Valid Arena Number!");
+							return true;
+						}
+						if(Game> 0){
+							if (sender instanceof Player)
+								p = (Player) sender;
+							WorldEditPlugin worldedit = plugin.hookWE();
+							if(args.length<= 1)
+								return false;
+							else{
+								Selection sel = worldedit.getSelection(p);
+								if(sel== null)
+									p.sendMessage(ChatColor.DARK_RED + "You must make a WorldEdit selection first!");
+								else{
+									if(p.hasPermission("hg.setarena")){
+										Location min = sel.getMinimumPoint();
+										Location max = sel.getMaximumPoint();
+										plugin.config.set("Arena." + args[1] + ".Max", max.getWorld().getName() + "," + max.getX() + "," 
+												+ max.getY() + "," + max.getZ());
+										plugin.config.set("Arena." + args[1] + ".Min", min.getWorld().getName() + "," + min.getX() + "," 
+												+ min.getY() + "," + min.getZ());
+										plugin.saveConfig();
+										p.sendMessage(ChatColor.GREEN + "Arena " + ChatColor.DARK_AQUA + args[1] 
+												+ ChatColor.GREEN + " created!");
+										plugin.arenaOpen.put(args[1], false);
+										return true;
+									}else{
+										p.sendMessage(ChatColor.DARK_RED + "You don't have permission!");
+									}
+								}
+							}
+							return true;
+						}else{
+							sender.sendMessage(ChatColor.DARK_AQUA + "[HG]" + ChatColor.RED + " You Silly! That's Not A Valid Arena Number!");
 							return true;
 						}
 					}else
