@@ -66,13 +66,12 @@ public class CR extends JavaPlugin {
 			this.getLogger().log(Level.SEVERE, "Could not save config to " + spawnsFile, ex);
 		}
 	}
-public WorldEditPlugin hookWE() {
-	Plugin wPlugin = getServer().getPluginManager().getPlugin("WorldEdit");
+	public WorldEditPlugin hookWE() {
+		Plugin wPlugin = getServer().getPluginManager().getPlugin("WorldEdit");
 
-	if ((wPlugin == null) || (!(wPlugin instanceof WorldEditPlugin)))
-		return null;
+		if ((wPlugin == null) || (!(wPlugin instanceof WorldEditPlugin)))
+			return null;
 
-	return (WorldEditPlugin) wPlugin;
+		return (WorldEditPlugin) wPlugin;
 }
-
 }
