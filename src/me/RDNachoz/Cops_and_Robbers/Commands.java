@@ -119,12 +119,12 @@ public class Commands implements CommandExecutor {
 						}
 					}else
 						return false;
-				}else if(args[0].equalsIgnoreCase("addarena")){
+				}else if(args[0].equalsIgnoreCase("addgame")){
 					if(args.length>= 2){
 						try{
 							Game = Integer.valueOf(args[1]);
 						}catch(Exception e){
-							sender.sendMessage(ChatColor.DARK_AQUA + "[HG]" + ChatColor.RED + " You Silly! That's Not A Valid Arena Number!");
+							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not A Valid Game Number!");
 							return true;
 						}
 						if(Game> 0){
@@ -157,14 +157,94 @@ public class Commands implements CommandExecutor {
 							}
 							return true;
 						}else{
-							sender.sendMessage(ChatColor.DARK_AQUA + "[HG]" + ChatColor.RED + " You Silly! That's Not A Valid Arena Number!");
+							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not A Valid Arena Number!");
 							return true;
 						}
 					}else
 						return false;
+				}else if(args[0].equalsIgnoreCase("setinmatespawn")){
+					if(args.length>= 3){
+						int Spawn = 0;
+						try{
+							Game = Integer.valueOf(args[1]);
+							Spawn = Integer.valueOf(args[2]);
+						}catch(Exception e){
+							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena or valid tribute spawn!");
+							return true;
+						}
+						if(Game> 0 || Spawn> 0){
+							if(sender instanceof Player){
+								p = (Player) sender;
+								String w = p.getLocation().getWorld().getName();
+								double x = p.getLocation().getX();
+								double y = p.getLocation().getY();
+								double z = p.getLocation().getZ();
+								String coords = w + "," + x + "," + y + "," + z;
+								plugin.spawns.set(String.valueOf(Game + "." + Spawn), coords);
+								plugin.saveSpawns();
+							}else
+								sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
+							return true;
+						}else{
+							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena or valid tribute spawn");
+							return true;
+						}
+					}else if(args.length == 2){
+						if (sender instanceof Player){
+							p = (Player) sender;
+							if (plugin.config.get(args[1]) != null){
+								int start = 1;
+								if (plugin.spawns.get(args[1]) != null)
+									while(start<25){
+										if (plugin.spawns.get(args[1] + "." + start) != null){
+											start = start+1;
+										}else{
+											int loc = start;
+											start = 25;
+											sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + "Begin Setting For Arena " + args[1] + " Starting From Point " + loc);
+											plugin.serverAdmin.put(p.getName(), args[1] + "-" + loc);
+										}
+									}
+								return true;
+							}
+							sender.sendMessage(ChatColor.RED + "That is Not A Valid Arena");
+							return true;
+						}else{
+							sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
+						}
+					}else
+						return false;
+				}else if(args[0].equalsIgnoreCase("setguardspawn")){
+					if(args.length>= 3){
+						int Spawn = 0;
+						try{
+							Game = Integer.valueOf(args[1]);
+						}catch(Exception e){
+							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena or valid tribute spawn!");
+							return true;
+						}
+						if(Game> 0 || Spawn> 0){
+							if(sender instanceof Player){
+								p = (Player) sender;
+								String w = p.getLocation().getWorld().getName();
+								double x = p.getLocation().getX();
+								double y = p.getLocation().getY();
+								double z = p.getLocation().getZ();
+								String coords = w + "," + x + "," + y + "," + z;
+								plugin.spawns.set(String.valueOf(Game + "." + Spawn), coords);
+								plugin.saveSpawns();
+							}else
+								sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
+							return true;
+						}else{
+							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena or valid tribute spawn");
+							return true;
+						}
+					}
+					return true;
 				}
-				return true;
 			}
+			return true;
 		}
 		return true;
 	}
