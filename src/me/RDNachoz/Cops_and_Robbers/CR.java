@@ -19,6 +19,7 @@ import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 
 public class CR extends JavaPlugin {
 	public HashMap<String, Boolean> arenaOpen = new HashMap<String, Boolean>();
+	public HashMap<String, String> serverAdmin = new HashMap<String, String>();
 
 	public CommandExecutor Commands = new Commands(this);
 	
