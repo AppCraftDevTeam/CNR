@@ -39,7 +39,7 @@ public class Commands implements CommandExecutor {
 					//done sender.sendMessage(ChatColor.DARK_AQUA + "/cr addgame <Game #>" + ChatColor.GOLD + " - Adds and Arena to The Config");
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr addescape <Arena #>" + ChatColor.GOLD + " - Adds A Deathmatch Arena to The Config");
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr setlobby <Lobby #>" + ChatColor.GOLD + " - Saves Your Surrent Postion For The Lobby");
-					sender.sendMessage(ChatColor.DARK_AQUA + "/cr setspec <Arena #>" + ChatColor.GOLD + " - Sets the Spawn For Spectators");
+					//done sender.sendMessage(ChatColor.DARK_AQUA + "/cr setspec <Arena #>" + ChatColor.GOLD + " - Sets the Spawn For Spectators");
 					//done sender.sendMessage(ChatColor.DARK_AQUA + "/cr setdeadspawn" + ChatColor.GOLD + " - Sets The Spawnpoint For Dead Players");
 					//done sender.sendMessage(ChatColor.DARK_AQUA + "/cr setguard" + ChatColor.GOLD + " - Sets The Chest Tier For The Chest You Are Looking At");
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr saveguardinv" + ChatColor.GOLD + " - Saves All Items In Your Inventory For A Tier");
@@ -262,6 +262,34 @@ public class Commands implements CommandExecutor {
 								double z = p.getLocation().getZ();
 								String coords = w + "," + x + "," + y + "," + z;
 								plugin.spawns.set(String.valueOf(Game + ".deadSpawn"), coords);
+								plugin.saveSpawns();
+							}else
+								sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
+							return true;
+						}else{
+							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena or valid tribute spawn");
+							return true;
+						}
+					}
+					return true;
+				}else if(args[0].equalsIgnoreCase("setspec")){
+					//All good
+					if(args.length>= 2){
+						try{
+							Game = Integer.valueOf(args[1]);
+						}catch(Exception e){
+							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena or valid tribute spawn!");
+							return true;
+						}
+						if(Game> 0){
+							if(sender instanceof Player){
+								p = (Player) sender;
+								String w = p.getLocation().getWorld().getName();
+								double x = p.getLocation().getX();
+								double y = p.getLocation().getY();
+								double z = p.getLocation().getZ();
+								String coords = w + "," + x + "," + y + "," + z;
+								plugin.spawns.set(String.valueOf(Game + ".specSpawn"), coords);
 								plugin.saveSpawns();
 							}else
 								sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
