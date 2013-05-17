@@ -12,6 +12,7 @@ import me.RDNachoz.Cops_and_Robbers.Commands;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -20,12 +21,15 @@ import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 public class CR extends JavaPlugin {
 	public HashMap<String, Boolean> arenaOpen = new HashMap<String, Boolean>();
 	public HashMap<String, String> serverAdmin = new HashMap<String, String>();
+	public HashMap<String, Integer> playing = new HashMap<String, Integer>();
 
 	public CommandExecutor Commands = new Commands(this);
 	
 	public FileConfiguration config;
 	public FileConfiguration spawns = null;
 	public File spawnsFile = null;
+	
+	public Listener CNRListener = new CNRListener(this);
 
 	public void onEnable(){
 		config = this.getConfig();
@@ -37,6 +41,7 @@ public class CR extends JavaPlugin {
 		if(!new File(getDataFolder(), "spawns.yml").exists())
 			this.saveSpawns();
 		this.getCommand("HG").setExecutor(Commands);
+		this.getServer().getPluginManager().registerEvents(CNRListener, this);
 		System.out.println("[HG]" + "HungerGames Has Been Enabled!");
 	}
 	public void reloadSpawns() {
