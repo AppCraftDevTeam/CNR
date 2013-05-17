@@ -328,41 +328,37 @@ public class Commands implements CommandExecutor {
 										p.sendMessage(ChatColor.GREEN + "Cell " + ChatColor.DARK_AQUA + args[2] 
 												+ ChatColor.GREEN + " created in Arena " + args[1]);
 										return true;
+									}else{
+										sender.sendMessage(ChatColor.RED + "You Do Not Have Permission to Execute This Command!");
 									}
+									return true;
 								}
 							}
 						}else{
-							sender.sendMessage(ChatColor.RED + "You Do Not Have Permission to Execute This Command!");
+							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not A Valid Arena Number!");
+							return true;
 						}
-						return true;
-					}else{
-						sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not A Valid Arena Number!");
+					}else
+						return false;
+				}else if(args[0].equalsIgnoreCase("setlobby")){
+					if(args.length>= 2){
+						if(sender instanceof Player){
+							p = (Player) sender;
+							String w = p.getLocation().getWorld().getName();
+							double x = p.getLocation().getX();
+							double y = p.getLocation().getY();
+							double z = p.getLocation().getZ();
+							String coords = w + "," + x + "," + y + "," + z;
+							plugin.spawns.set("lobbySpawn", coords);
+							plugin.saveSpawns();
+						}else
+							sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
 						return true;
 					}
 				}
-			}else{
 				return false;
-			}else if(args[0].equalsIgnoreCase("setlobby")){
-				if(args.length>= 2){
-					if(sender instanceof Player){
-						p = (Player) sender;
-						String w = p.getLocation().getWorld().getName();
-						double x = p.getLocation().getX();
-						double y = p.getLocation().getY();
-						double z = p.getLocation().getZ();
-						String coords = w + "," + x + "," + y + "," + z;
-						plugin.spawns.set("lobbySpawn", coords);
-						plugin.saveSpawns();
-					}else
-						sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
-					return true;
-				}
 			}
-			return true;
 		}
 		return true;
 	}
-	return true;
-}
-}
 }
