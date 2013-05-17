@@ -35,7 +35,7 @@ public class Commands implements CommandExecutor {
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr stop <Game #>" + ChatColor.GOLD + " - Stops The Selected Arena");
 				}
 				if (!(sender instanceof Player) || (sender instanceof Player && ((Player) sender).hasPermission("cr.admin"))){
-					sender.sendMessage(ChatColor.DARK_AQUA + "/cr setcell <Game #> <Cell #>" + ChatColor.GOLD + " - Saves A Spawn To The Config");
+					//done sender.sendMessage(ChatColor.DARK_AQUA + "/cr setcell <Game #> <Cell #>" + ChatColor.GOLD + " - Saves A Spawn To The Config");
 					//done sender.sendMessage(ChatColor.DARK_AQUA + "/cr addgame <Game #>" + ChatColor.GOLD + " - Adds and Arena to The Config");
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr addescape <Arena #>" + ChatColor.GOLD + " - Adds A Deathmatch Arena to The Config");
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr setlobby <Lobby #>" + ChatColor.GOLD + " - Saves Your Surrent Postion For The Lobby");
@@ -50,6 +50,7 @@ public class Commands implements CommandExecutor {
 			}
 			if (args.length == 1){
 				int Game = 0;
+				int Cell = 0;
 				if(args[0].equalsIgnoreCase("join")){
 					if(args.length>= 2){
 						try{
@@ -300,10 +301,68 @@ public class Commands implements CommandExecutor {
 						}
 					}
 					return true;
+				}else if(args[0].equalsIgnoreCase("addcell")){
+					if(args.length>= 2){
+						try{
+							Game = Integer.valueOf(args[1]);
+							Cell = Integer.valueOf(args[2]);
+						}catch(Exception e){
+							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not A Valid Game Number!");
+							return true;
+						}
+						if(Cell> 0){
+							if (sender instanceof Player)
+								p = (Player) sender;
+							WorldEditPlugin worldedit1 = plugin.hookWE(); 
+							if(args.length<= 1)
+								return false;
+							else{
+								Selection sel1 = worldedit1.getSelection(p);
+								if(sel1== null)
+									p.sendMessage(ChatColor.DARK_RED + "You must make a WorldEdit selection first!");
+								else{
+									if(p.hasPermission("hg.setarena")){
+										plugin.config.set("Cell." + args[2] + ".Max", p.getWorld().getName() + "," + p.getLocation().getX() + "," 
+												+ p.getLocation().getY() + "," + p.getLocation().getZ());
+										plugin.saveConfig();
+										p.sendMessage(ChatColor.GREEN + "Cell " + ChatColor.DARK_AQUA + args[2] 
+												+ ChatColor.GREEN + " created in Arena " + args[1]);
+										return true;
+									}
+								}
+							}
+						}else{
+							sender.sendMessage(ChatColor.RED + "You Do Not Have Permission to Execute This Command!");
+						}
+						return true;
+					}else{
+						sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not A Valid Arena Number!");
+						return true;
+					}
+				}
+			}else{
+				return false;
+			}else if(args[0].equalsIgnoreCase("setlobby")){
+				if(args.length>= 2){
+					if(sender instanceof Player){
+						p = (Player) sender;
+						String w = p.getLocation().getWorld().getName();
+						double x = p.getLocation().getX();
+						double y = p.getLocation().getY();
+						double z = p.getLocation().getZ();
+						String coords = w + "," + x + "," + y + "," + z;
+						plugin.spawns.set("lobbySpawn", coords);
+						plugin.saveSpawns();
+					}else
+						sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
+					return true;
 				}
 			}
 			return true;
 		}
 		return true;
 	}
+	return true;
+}
+}
 }
