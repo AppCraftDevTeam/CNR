@@ -24,13 +24,14 @@ public class CR extends JavaPlugin {
 	public HashMap<String, Integer> playing = new HashMap<String, Integer>();
 
 	public CommandExecutor Commands = new Commands(this);
-	
+
 	public FileConfiguration config;
 	public FileConfiguration spawns = null;
 	public File spawnsFile = null;
-	
-	public Listener CNRListener = new CNRListener(this);
 
+	public Listener CNRListener = new CNRListener(this);
+	//TODO Remove this after it works :).
+	
 	public void onEnable(){
 		config = this.getConfig();
 		config.options().copyDefaults(true);
@@ -78,5 +79,5 @@ public class CR extends JavaPlugin {
 			return null;
 
 		return (WorldEditPlugin) wPlugin;
-}
+	}
 }
