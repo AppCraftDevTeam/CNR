@@ -1,0 +1,16 @@
+name: Cops And Robbers
+main: me.RDNachoz.Cops_and_Robbers.CR
+version: 1.0_BETA
+authors:
+    - RDNachoz
+    - Travja
+    - Steffion
+description: >
+             Empty.
+commands:
+    cr:
+        description: Command to use Cops And Robbers.
+        usage: /<command>
+        aliases:
+            - copsandrobbers
+            - c
