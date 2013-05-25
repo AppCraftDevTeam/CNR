@@ -6,9 +6,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.logging.Level;
 
-
 import me.RDNachoz.Cops_and_Robbers.Commands;
-
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -42,6 +40,7 @@ public class CR extends JavaPlugin {
 			this.saveSpawns();
 		this.getCommand("cr").setExecutor(Commands);
 		this.getServer().getPluginManager().registerEvents(CNRListener, this);
+		Wrapper.mm.setup();
 		System.out.println("[CNR]" + "Cops And Robbers has been Enabled!");
 	}
 	public void reloadSpawns() {
