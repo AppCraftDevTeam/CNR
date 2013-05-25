@@ -40,9 +40,9 @@ public class CR extends JavaPlugin {
 		spawns.options().copyDefaults(true);
 		if(!new File(getDataFolder(), "spawns.yml").exists())
 			this.saveSpawns();
-		this.getCommand("HG").setExecutor(Commands);
+		this.getCommand("cr").setExecutor(Commands);
 		this.getServer().getPluginManager().registerEvents(CNRListener, this);
-		System.out.println("[HG]" + "HungerGames Has Been Enabled!");
+		System.out.println("[CNR]" + "Cops And Robbers has been Enabled!");
 	}
 	public void reloadSpawns() {
 		if (spawnsFile == null) {

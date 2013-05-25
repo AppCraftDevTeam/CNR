@@ -55,14 +55,14 @@ public class Commands implements CommandExecutor {
 						try{
 							Game = Integer.valueOf(args[1]);
 						}catch(Exception e){
-							sender.sendMessage(ChatColor.DARK_AQUA + "[CR]" + ChatColor.RED + " You Silly! That's Not An Game!");
+							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Game!");
 							return true;
 						}
 						if(Game> 0){
 							//TODO Add them to the game!
 							return true;
 						}else{
-							sender.sendMessage(ChatColor.DARK_AQUA + "[HG]" + ChatColor.RED + " You Silly! That's Not An Game!");
+							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Game!");
 							return true;
 						}
 					}else
@@ -75,14 +75,14 @@ public class Commands implements CommandExecutor {
 						try{
 							Game = Integer.valueOf(args[1]);
 						}catch(Exception e){
-							sender.sendMessage(ChatColor.DARK_AQUA + "[HG]" + ChatColor.RED + " You Silly! That's Not An Arena!");
+							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena!");
 							return true;
 						}
 						if(Game> 0){
 							//TODO Add Vote
 							return true;
 						}else{
-							sender.sendMessage(ChatColor.DARK_AQUA + "[HG]" + ChatColor.RED + " You Silly! That's Not An Arena!");
+							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena!");
 							return true;
 						}
 					}else
@@ -92,14 +92,14 @@ public class Commands implements CommandExecutor {
 						try{
 							Game = Integer.valueOf(args[1]);
 						}catch(Exception e){
-							sender.sendMessage(ChatColor.DARK_AQUA + "[HG]" + ChatColor.RED + " You Silly! That's Not An Arena!");
+							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena!");
 							return true;
 						}
 						if(Game> 0){
 							//TODO Make it start the game
 							return true;
 						}else{
-							sender.sendMessage(ChatColor.DARK_AQUA + "[HG]" + ChatColor.RED + " You Silly! That's Not An Arena!");
+							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena!");
 							return true;
 						}
 					}else
@@ -109,14 +109,14 @@ public class Commands implements CommandExecutor {
 						try{
 							Game = Integer.valueOf(args[1]);
 						}catch(Exception e){
-							sender.sendMessage(ChatColor.DARK_AQUA + "[HG]" + ChatColor.RED + " You Silly! That's Not An Arena!");
+							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena!");
 							return true;
 						}
 						if(Game> 0){
 							//TODO Make it stop the game
 							return true;
 						}else{
-							sender.sendMessage(ChatColor.DARK_AQUA + "[HG]" + ChatColor.RED + " You Silly! That's Not An Arena!");
+							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena!");
 							return true;
 						}
 					}else
