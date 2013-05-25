@@ -30,7 +30,6 @@ public class CR extends JavaPlugin {
 	public File spawnsFile = null;
 
 	public Listener CNRListener = new CNRListener(this);
-	//TODO Remove this after it works :).
 	
 	public void onEnable(){
 		config = this.getConfig();
