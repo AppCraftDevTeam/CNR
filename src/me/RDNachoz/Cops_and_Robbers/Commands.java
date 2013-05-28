@@ -1,5 +1,8 @@
 package me.RDNachoz.Cops_and_Robbers;
 
+import me.RDNachoz.Cops_and_Robbers.managers.MessageManager;
+import me.RDNachoz.Cops_and_Robbers.managers.MessageManager.PrefixType;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -10,12 +13,12 @@ import org.bukkit.entity.Player;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.bukkit.selections.Selection;
 
-import me.RDNachoz.Cops_and_Robbers.CR;
-
 public class Commands implements CommandExecutor {
 	public CR plugin;
-	public Commands(CR cr) {
+	public MessageManager mm;
+	public Commands(CR cr, MessageManager m) {
 		this.plugin = cr;
+		this.mm = m;
 	}
 
 	@Override
@@ -51,22 +54,26 @@ public class Commands implements CommandExecutor {
 				int Game = 0;
 				int Cell = 0;
 				if(args[0].equalsIgnoreCase("join")){
-					if(args.length>= 2){
-						try{
-							Game = Integer.valueOf(args[1]);
-						}catch(Exception e){
-							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Game!");
-							return true;
-						}
-						if(Game> 0){
-							//TODO Add them to the game!
-							return true;
-						}else{
-							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Game!");
-							return true;
-						}
-					}else
-						return false;
+					if(sender instanceof Player){
+						p = (Player) sender;
+						if(args.length>= 2){
+							try{
+								Game = Integer.valueOf(args[1]);
+							}catch(Exception e){
+								sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Game!");
+								return true;
+							}
+							if(Game> 0){
+								//TODO Add them to the game!
+								plugin.playing.put(p.getName(), Game);
+								return true;
+							}else{
+								sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Game!");
+								return true;
+							}
+						}else
+							return false;
+					}else mm.sendMessage(null, PrefixType.ERROR, "That can only be run in game"); return false; // <----- Did I do that right @Travja
 				}else if(args[0].equalsIgnoreCase("leave")){
 					//TODO remove from the arena!
 					return true;
