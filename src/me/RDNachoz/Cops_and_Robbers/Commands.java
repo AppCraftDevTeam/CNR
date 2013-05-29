@@ -1,10 +1,18 @@
 package me.RDNachoz.Cops_and_Robbers;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
+
 import me.RDNachoz.Cops_and_Robbers.managers.MessageManager;
 import me.RDNachoz.Cops_and_Robbers.managers.MessageManager.PrefixType;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -24,8 +32,14 @@ public class Commands implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		Player p = null;
-		if(label.equalsIgnoreCase("cr")){
+		if(label.equalsIgnoreCase("cr") || label.equalsIgnoreCase("c") || label.equalsIgnoreCase("copsandrobbers")){
+			/*Commands Don't work
+			 * I tried debug
+			 * debug doesn't follow through
+			 * didn't get any errors
+			 * Not sure what the problem is @Travja*/
 			if (args.length == 0 || args[0].equalsIgnoreCase("help")){
+				sender.sendMessage(ChatColor.GREEN + "Cops&Robbers by " + ChatColor.DARK_AQUA + "Travja, RDNachoz, and Steffion!");
 				if (!(sender instanceof Player) || (sender instanceof Player && ((Player) sender).hasPermission("cr.join"))){
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr join <Arena #>" + ChatColor.GOLD + " - Joins The Selected Arena");
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr leave" + ChatColor.GOLD + " - Leaves The Lobby");
@@ -64,8 +78,9 @@ public class Commands implements CommandExecutor {
 								return true;
 							}
 							if(Game> 0){
-								//TODO Add them to the game!
 								plugin.playing.put(p.getName(), Game);
+								mm.sendMessage(p, PrefixType.NORMAL, "You have joined the game!");
+								mm.sendMessage(p, PrefixType.NORMAL, "You'll be teleported when the game starts!");
 								return true;
 							}else{
 								sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Game!");
@@ -103,7 +118,59 @@ public class Commands implements CommandExecutor {
 							return true;
 						}
 						if(Game> 0){
-							//TODO Make it start the game
+							List<Player> in = new ArrayList<Player>();
+							for(String pname: plugin.playing.keySet()){
+								if(plugin.playing.get(pname) == Game){
+									p = Bukkit.getPlayer(pname);
+									in.add(p);
+								}
+							}
+							int guard = -1;
+							for(String pname: plugin.playing.keySet()){
+								if(plugin.playing.get(pname) == Game){
+									Location loc = null;
+									Random r = new Random();
+									if(guard != -1){
+										guard = r.nextInt(in.size());
+										p = in.get(guard);
+										try{
+											String[] coords = plugin.spawns.getString(Game + ".guardSpawn").split(",");
+											String world = coords[0];
+											double x = Double.parseDouble(coords[1]);
+											double y = Double.parseDouble(coords[2]);
+											double z = Double.parseDouble(coords[3]);
+											loc = new Location(Bukkit.getWorld(world), x, y, z);
+										}catch(Exception e){
+											p.sendMessage(ChatColor.RED + "Something went wrong upon trying to teleport you, contact an admin.");
+										}
+										if(loc != null){
+											p.teleport(loc);
+											in.remove(p);
+										}
+									}else{
+										List<Location> locs = new ArrayList<Location>();
+										if(plugin.spawns.getConfigurationSection(String.valueOf(Game))!= null){
+											Map<String, Object> temp = plugin.spawns.getConfigurationSection(String.valueOf(Game)).getValues(false);
+											for(Entry<String, Object> entry: temp.entrySet()){
+												if(plugin.spawns.getConfigurationSection(String.valueOf(Game) + "." + entry.getKey())!= null){
+													String[] coords = ((String) plugin.spawns.get(String.valueOf(Game) + "." + entry.getKey())).split(",");
+													try{
+														World world = Bukkit.getWorld(coords[0]);
+														double x = Double.parseDouble(coords[1]);
+														double y = Double.parseDouble(coords[2]);
+														double z = Double.parseDouble(coords[3]);
+														loc = new Location(world, x, y, z);
+														locs.add(loc);
+													}catch(Exception e){
+														p.sendMessage(ChatColor.RED + "Something went wrong upon trying to teleport you, contact an admin.");
+													}
+												}
+											}
+										}
+										p.teleport(locs.get(r.nextInt(locs.size())));
+									}
+								}
+							}
 							return true;
 						}else{
 							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena!");
@@ -129,6 +196,7 @@ public class Commands implements CommandExecutor {
 					}else
 						return false;
 				}else if(args[0].equalsIgnoreCase("addgame")){
+					//TODO fix commands /*Nothing works*/
 					if(args.length>= 2){
 						try{
 							Game = Integer.valueOf(args[1]);
@@ -147,7 +215,7 @@ public class Commands implements CommandExecutor {
 								if(sel== null)
 									p.sendMessage(ChatColor.DARK_RED + "You must make a WorldEdit selection first!");
 								else{
-									if(p.hasPermission("hg.setarena")){
+									if(p.hasPermission("cr.setarena")){
 										Location min = sel.getMinimumPoint();
 										Location max = sel.getMaximumPoint();
 										plugin.config.set("Arena." + args[1] + ".Max", max.getWorld().getName() + "," + max.getX() + "," 

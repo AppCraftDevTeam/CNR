@@ -21,7 +21,7 @@ public class CR extends JavaPlugin {
 	public HashMap<String, String> serverAdmin = new HashMap<String, String>();
 	public HashMap<String, Integer> playing = new HashMap<String, Integer>();
 
-	public CommandExecutor Commands = new Commands(this);
+	public CommandExecutor Commands = new Commands(this, null);
 
 	public FileConfiguration config;
 	public FileConfiguration spawns = null;
