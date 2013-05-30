@@ -21,7 +21,7 @@ public class CR extends JavaPlugin {
 	public HashMap<String, String> serverAdmin = new HashMap<String, String>();
 	public HashMap<String, Integer> playing = new HashMap<String, Integer>();
 
-	public CommandExecutor Commands = new Commands(this, null);
+	public CommandExecutor Commands = new Commands(this);
 
 	public FileConfiguration config;
 	public FileConfiguration spawns = null;
@@ -40,7 +40,6 @@ public class CR extends JavaPlugin {
 			this.saveSpawns();
 		this.getCommand("cr").setExecutor(Commands);
 		this.getServer().getPluginManager().registerEvents(CNRListener, this);
-		Wrapper.mm.setup();
 		System.out.println("[CNR]" + "Cops And Robbers has been Enabled!");
 	}
 	public void reloadSpawns() {

@@ -2,7 +2,6 @@ package me.RDNachoz.Cops_and_Robbers.managers;
 
 import java.io.File;
 
-import me.RDNachoz.Cops_and_Robbers.CR;
 import me.RDNachoz.Cops_and_Robbers.W;
 
 import org.bukkit.configuration.ConfigurationSection;

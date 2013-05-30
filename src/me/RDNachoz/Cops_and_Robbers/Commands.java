@@ -22,10 +22,8 @@ import com.sk89q.worldedit.bukkit.selections.Selection;
 
 public class Commands implements CommandExecutor {
 	public CR plugin;
-	public MessageManager mm;
-	public Commands(CR cr, MessageManager m) {
+	public Commands(CR cr) {
 		this.plugin = cr;
-		this.mm = m;
 	}
 
 	@Override
@@ -78,8 +76,8 @@ public class Commands implements CommandExecutor {
 							}
 							if(Game> 0){
 								plugin.playing.put(p.getName(), Game);
-								mm.sendMessage(p, TAG.NORMAL, "You have joined the game!");
-								mm.sendMessage(p, PrefixType.NORMAL, "You'll be teleported when the game starts!");
+								MessageManager.sendMessage(p, "You have joined the game!", true);
+								MessageManager.sendMessage(p, "You'll be teleported when the game starts!", true);
 								return true;
 							}else{
 								sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Game!");
@@ -87,7 +85,7 @@ public class Commands implements CommandExecutor {
 							}
 						}else
 							return false;
-					}else mm.sendMessage(ChatColor.GREEN +"That can only be run in game"); return false; // <----- Did I do that right @Travja
+					}else MessageManager.sendMessage(p, ChatColor.GREEN +"That can only be run in game", true); return false; // <----- Did I do that right @Travja
 				}else if(args[0].equalsIgnoreCase("leave")){
 					//TODO remove from the arena!
 					return true;
