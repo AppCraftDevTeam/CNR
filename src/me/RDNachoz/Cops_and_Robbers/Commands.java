@@ -59,7 +59,6 @@ public class Commands implements CommandExecutor {
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr disable" + ChatColor.GOLD + " - Disables All Arenas");
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr enable" + ChatColor.GOLD + " - Enables All Arenas");
 				}
-				return true;
 			}
 			if (args.length == 1){
 				int Game = 0;
