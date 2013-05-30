@@ -52,12 +52,12 @@ public class Commands implements CommandExecutor {
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr stop <Game #>" + ChatColor.GOLD + " - Stops The Selected Arena");
 				}
 				if (!(sender instanceof Player) || (sender instanceof Player && ((Player) sender).hasPermission("cr.admin"))){
-					//done sender.sendMessage(ChatColor.DARK_AQUA + "/cr setcell <Game #> <Cell #>" + ChatColor.GOLD + " - Saves A Spawn To The Config");
-					//done sender.sendMessage(ChatColor.DARK_AQUA + "/cr addgame <Game #>" + ChatColor.GOLD + " - Adds and Arena to The Config");
-					//done sender.sendMessage(ChatColor.DARK_AQUA + "/cr setlobby <Lobby #>" + ChatColor.GOLD + " - Saves Your Surrent Postion For The Lobby");
-					//done sender.sendMessage(ChatColor.DARK_AQUA + "/cr setspec <Arena #>" + ChatColor.GOLD + " - Sets the Spawn For Spectators");
-					//done sender.sendMessage(ChatColor.DARK_AQUA + "/cr setdeadspawn" + ChatColor.GOLD + " - Sets The Spawnpoint For Dead Players");
-					//done sender.sendMessage(ChatColor.DARK_AQUA + "/cr setguard" + ChatColor.GOLD + " - Sets The Chest Tier For The Chest You Are Looking At");
+					sender.sendMessage(ChatColor.DARK_AQUA + "/cr setcell <Game #> <Cell #>" + ChatColor.GOLD + " - Saves A Spawn To The Config");
+					sender.sendMessage(ChatColor.DARK_AQUA + "/cr addgame <Game #>" + ChatColor.GOLD + " - Adds and Arena to The Config");
+					sender.sendMessage(ChatColor.DARK_AQUA + "/cr setlobby <Lobby #>" + ChatColor.GOLD + " - Saves Your Surrent Postion For The Lobby");
+					sender.sendMessage(ChatColor.DARK_AQUA + "/cr setspec <Arena #>" + ChatColor.GOLD + " - Sets the Spawn For Spectators");
+					sender.sendMessage(ChatColor.DARK_AQUA + "/cr setdeadspawn" + ChatColor.GOLD + " - Sets The Spawnpoint For Dead Players");
+					sender.sendMessage(ChatColor.DARK_AQUA + "/cr setguard" + ChatColor.GOLD + " - Sets The Chest Tier For The Chest You Are Looking At");
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr saveguardinv" + ChatColor.GOLD + " - Saves All Items In Your Inventory For A Tier");
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr disable" + ChatColor.GOLD + " - Disables All Arenas");
 					sender.sendMessage(ChatColor.DARK_AQUA + "/cr enable" + ChatColor.GOLD + " - Enables All Arenas");
@@ -310,6 +310,7 @@ public class Commands implements CommandExecutor {
 								String coords = w + "," + x + "," + y + "," + z;
 								plugin.spawns.set(String.valueOf(Game + ".guardSpawn"), coords);
 								plugin.saveSpawns();
+								sender.sendMessage(ChatColor.GREEN + "Guard Spawn Set For Arena" + args[1] + ChatColor.GREEN + "!");
 							}else
 								sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
 							return true;
@@ -338,6 +339,7 @@ public class Commands implements CommandExecutor {
 								String coords = w + "," + x + "," + y + "," + z;
 								plugin.spawns.set(String.valueOf(Game + ".deadSpawn"), coords);
 								plugin.saveSpawns();
+								sender.sendMessage(ChatColor.GREEN + "Dead Spawn Set!");
 							}else
 								sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
 							return true;
@@ -366,6 +368,7 @@ public class Commands implements CommandExecutor {
 								String coords = w + "," + x + "," + y + "," + z;
 								plugin.spawns.set(String.valueOf(Game + ".specSpawn"), coords);
 								plugin.saveSpawns();
+								sender.sendMessage(ChatColor.GREEN + "Spectator Spawn Set!");
 							}else
 								sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
 							return true;
@@ -425,6 +428,7 @@ public class Commands implements CommandExecutor {
 							String coords = w + "," + x + "," + y + "," + z;
 							plugin.spawns.set("lobbySpawn", coords);
 							plugin.saveSpawns();
+							sender.sendMessage(ChatColor.GREEN + "Lobby Spawn Set!");
 						}else
 							sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
 						return true;
