@@ -34,7 +34,7 @@ public class Commands implements CommandExecutor {
 			 * I tried debug
 			 * debug doesn't follow through
 			 * didn't get any errors
-			 * Not sure what the problem is @Travgja*/
+			 * Not sure what the problem is @Travja*/
 			if (args.length == 0 || args[0].equalsIgnoreCase("help")){
 				sender.sendMessage(ChatColor.GREEN + "Cops&Robbers by " + ChatColor.DARK_AQUA + "Travja, RDNachoz, and Steffion!");
 				if (!(sender instanceof Player) || (sender instanceof Player && ((Player) sender).hasPermission("cr.join"))){
