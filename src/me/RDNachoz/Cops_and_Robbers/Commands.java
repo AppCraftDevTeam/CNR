@@ -16,6 +16,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.bukkit.selections.Selection;
@@ -312,6 +314,19 @@ public class Commands implements CommandExecutor {
 						sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena or valid tribute spawn");
 						return true;
 					}
+				}
+				return true;
+			}else if(args[0].equalsIgnoreCase("saveguardinv")){
+				if(sender instanceof Player){
+					p = (Player) sender;
+					PlayerInventory inv = p.getInventory();
+					ItemStack[] guarditems = inv.getContents();
+					ItemStack[] guardarmor = inv.getArmorContents();
+					plugin.config.set("Guard.Items", guarditems);
+					plugin.config.set("Guard.Armor", guardarmor);
+					plugin.saveConfig();
+					p.sendMessage(ChatColor.DARK_AQUA + "Guard" + ChatColor.GREEN + " inventory saved!");
+					return true;
 				}
 				return true;
 			}else if(args[0].equalsIgnoreCase("setdeadspawn")){
