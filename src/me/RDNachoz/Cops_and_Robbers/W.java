@@ -3,7 +3,7 @@ package me.RDNachoz.Cops_and_Robbers;
 import java.util.ArrayList;
 
 import me.RDNachoz.Cops_and_Robbers.managers.ConfigM;
-import me.RDNachoz.Cops_and_Robbers.managers.MessageManager;
+import me.RDNachoz.Cops_and_Robbers.managers.MessageM;
 
 
 public class W {
@@ -12,7 +12,7 @@ public class W {
 
 	public static void newFiles() {
 		for (String Filename : newFiles) {
-			MessageManager.log("%warnCouldn't find '%arg%filename%.yml%warn' creating new one.", true,
+			MessageM.log("%warnCouldn't find '%arg%filename%.yml%warn' creating new one.", true,
 					"filename-"+Filename);
 		}
 		newFiles.clear();

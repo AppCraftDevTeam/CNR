@@ -1,12 +1,11 @@
 package me.RDNachoz.Cops_and_Robbers.managers;
 
 import me.RDNachoz.Cops_and_Robbers.W;
-import me.RDNachoz.Cops_and_Robbers.managers.ConfigM;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-public class MessageManager {
+public class MessageM {
 	public static String code = "\u00A7";
 	public static String NORMAL = "&b";
 	public static String WARNING = "&c";
@@ -25,9 +24,9 @@ public class MessageManager {
 	public static void sendMessage(Player player, String message, Boolean tag, String ... vars) {
 		tag(tag);
 		if (player == null) {
-			Bukkit.getConsoleSender().sendMessage(MessageManager.replaceAll(mtag + message, vars));
+			Bukkit.getConsoleSender().sendMessage(MessageM.replaceAll(mtag + message, vars));
 		} else {
-			player.sendMessage(MessageManager.replaceAll(mtag + message, vars));
+			player.sendMessage(MessageM.replaceAll(mtag + message, vars));
 		}
 	}
 
@@ -41,10 +40,10 @@ public class MessageManager {
 	public static void sendFMessage(Player player, String location, String Filename, Boolean tag, String ... vars) {
 		tag(tag);
 		if (player == null) {
-			Bukkit.getConsoleSender().sendMessage(MessageManager.replaceAll(mtag + new ConfigM(Filename).getFile()
+			Bukkit.getConsoleSender().sendMessage(MessageM.replaceAll(mtag + new ConfigM(Filename).getFile()
 					.getString(location), vars));
 		} else {
-			player.sendMessage(MessageManager.replaceAll(mtag + new ConfigM(Filename).getFile()
+			player.sendMessage(MessageM.replaceAll(mtag + new ConfigM(Filename).getFile()
 					.getString(location), vars));
 		}
 	}
@@ -59,10 +58,10 @@ public class MessageManager {
 		tag(tag);
 		for (Player player : Bukkit.getOnlinePlayers()) {
 			String pMessage = message.replaceAll("%player%", player.getDisplayName());
-			player.sendMessage(MessageManager.replaceAll(mtag + pMessage, vars));
+			player.sendMessage(MessageM.replaceAll(mtag + pMessage, vars));
 		}
 		message = message.replaceAll("%player%", "Console");
-		Bukkit.getConsoleSender().sendMessage(MessageManager.replaceAll(mtag + message, vars));
+		Bukkit.getConsoleSender().sendMessage(MessageM.replaceAll(mtag + message, vars));
 	}
 
 	/**
@@ -74,14 +73,14 @@ public class MessageManager {
 	public static void broadcastFMessage(String location, String Filename, Boolean tag, String ... vars) {
 		tag(tag);
 		for (Player player : Bukkit.getOnlinePlayers()) {
-			String pMessage = MessageManager.replaceAll(mtag + new ConfigM(Filename).getFile()
+			String pMessage = MessageM.replaceAll(mtag + new ConfigM(Filename).getFile()
 					.getString(location), vars).replaceAll("%player%", player.getDisplayName());
-			player.sendMessage(MessageManager.replaceAll(mtag + pMessage, vars));
+			player.sendMessage(MessageM.replaceAll(mtag + pMessage, vars));
 		}
-		String message = MessageManager.replaceAll(mtag + new ConfigM(Filename).getFile()
+		String message = MessageM.replaceAll(mtag + new ConfigM(Filename).getFile()
 				.getString(location),
 				vars).replaceAll("%player%", "Console");
-		Bukkit.getConsoleSender().sendMessage(MessageManager.replaceAll(mtag + message, vars));
+		Bukkit.getConsoleSender().sendMessage(MessageM.replaceAll(mtag + message, vars));
 	}
 
 	/**
@@ -91,7 +90,7 @@ public class MessageManager {
 	 */
 	public static void log(String message, Boolean tag, String ... vars) {
 		tag(tag);
-		Bukkit.getConsoleSender().sendMessage(MessageManager.replaceAll(mtag + message, vars));
+		Bukkit.getConsoleSender().sendMessage(MessageM.replaceAll(mtag + message, vars));
 	}
 
 	/**
@@ -101,9 +100,9 @@ public class MessageManager {
 	 * @return
 	 */
 	public static String replaceAll(String message, String ... vars) {
-		return MessageManager.replaceColours(
-				MessageManager.replaceColourVars(
-						MessageManager.replaceVars(message, vars)));
+		return MessageM.replaceColours(
+				MessageM.replaceColourVars(
+						MessageM.replaceVars(message, vars)));
 	}
 
 	/**
@@ -143,7 +142,7 @@ public class MessageManager {
 		message = message.replaceAll("%head", c(CType.HEADER));
 		return message;
 	}
-
+	
 	/**
 	 * Enable/Disable the tag in front of a message.	
 	 * @param tag
@@ -164,7 +163,7 @@ public class MessageManager {
 		HEADER,
 		TAG;
 	}
-
+	
 	/**
 	 * Return colour string from config.
 	 * @param colour

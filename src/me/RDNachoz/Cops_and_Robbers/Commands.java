@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
-import me.RDNachoz.Cops_and_Robbers.managers.MessageManager;
+import me.RDNachoz.Cops_and_Robbers.managers.MessageM;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -72,8 +72,8 @@ public class Commands implements CommandExecutor {
 						}
 						if(Game> 0){
 							plugin.playing.put(p.getName(), Game);
-							MessageManager.sendMessage(p, "You have joined the game!", true);
-							MessageManager.sendMessage(p, "You'll be teleported when the game starts!", true);
+							MessageM.sendMessage(p, "You have joined the game!", true);
+							MessageM.sendMessage(p, "You'll be teleported when the game starts!", true);
 							return true;
 						}else{
 							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Game!");
@@ -82,7 +82,7 @@ public class Commands implements CommandExecutor {
 					}else
 						return false;
 				}else{
-					MessageManager.sendMessage(p, ChatColor.GREEN +"That can only be run in game", true);
+					MessageM.sendMessage(p, ChatColor.GREEN +"That can only be run in game", true);
 					return true;
 				}
 			}else if(args[0].equalsIgnoreCase("leave")){
