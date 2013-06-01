@@ -9,6 +9,11 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 public class ConfigM {
+	/*
+	 * ConfigM - A Configuration manager for your plugin.
+	 * Made by Steffion (c) 2013.
+	 */
+
 	File File;
 	FileConfiguration FileC;
 	ConfigurationSection FileCS;

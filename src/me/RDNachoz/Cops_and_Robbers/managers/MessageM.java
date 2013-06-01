@@ -6,6 +6,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class MessageM {
+	/*
+	 * MessageM - A Messages manager for your plugin.
+	 * Made by Steffion (c) 2013.
+	 */
+
 	public static String code = "\u00A7";
 	public static String NORMAL = "&b";
 	public static String WARNING = "&c";
@@ -142,7 +147,7 @@ public class MessageM {
 		message = message.replaceAll("%head", c(CType.HEADER));
 		return message;
 	}
-	
+
 	/**
 	 * Enable/Disable the tag in front of a message.	
 	 * @param tag
@@ -163,7 +168,7 @@ public class MessageM {
 		HEADER,
 		TAG;
 	}
-	
+
 	/**
 	 * Return colour string from config.
 	 * @param colour
