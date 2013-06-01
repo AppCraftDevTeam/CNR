@@ -30,6 +30,7 @@ public class CR extends JavaPlugin {
 		
 		W.messages.setDefault("error.nopermission", "%errYou don't have the permissions to do that!");
 		W.messages.setDefault("error.notagame", "%errYou silly! That's not a game!");
+		W.messages.setDefault("error.notingame", "%errYou aren't in game!");
 
 		W.newFiles();
 		this.getCommand("cr").setExecutor(Commands);

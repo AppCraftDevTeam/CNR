@@ -91,7 +91,32 @@ public class Commands implements CommandExecutor {
 					return true;
 				}
 			}else if(args[0].equalsIgnoreCase("leave")){
-				//TODO remove from the arena!
+				/**
+				 * If player is in game and @lobbySpawn is set
+				 * teleport them to the @lobbySpawn location
+				 * if not, teleport them to the @world spawn
+				 * @author Travja
+				 */
+				if(sender instanceof Player){
+					p = (Player) sender;
+					if(plugin.playing.containsKey(p.getName())){
+						if(W.spawns.getFile().getString("lobbySpawn")!= null){
+							plugin.playing.remove(p.getName());
+							String[] coords = W.spawns.getFile().getString("lobbySpawn").split(",");
+							p.teleport(new Location(Bukkit.getWorld(coords[0]), Double.parseDouble(coords[1]),
+									Double.parseDouble(coords[2]), Double.parseDouble(coords[3])));
+							MessageM.sendMessage(p, "You have left the game!", true);
+							return true;
+						}else{
+							p.teleport(p.getLocation().getWorld().getSpawnLocation());
+							MessageM.sendMessage(p, "You have left the game!", true);
+							return true;
+						}
+					}else{
+						MessageM.sendFMessage(p, "error.notingame", "messages", true);
+						return true;
+					}
+				}
 				return true;
 			}else if(args[0].equalsIgnoreCase("vote")){
 				if(args.length>= 2){
