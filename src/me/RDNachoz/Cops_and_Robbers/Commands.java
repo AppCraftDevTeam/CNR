@@ -67,7 +67,7 @@ public class Commands implements CommandExecutor {
 						try{
 							Game = Integer.valueOf(args[1]);
 						}catch(Exception e){
-							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Game!");
+							MessageM.sendFMessage(p, "error.notagame", "messages", true);
 							return true;
 						}
 						if(Game> 0){
@@ -76,7 +76,7 @@ public class Commands implements CommandExecutor {
 							MessageM.sendMessage(p, "You'll be teleported when the game starts!", true);
 							return true;
 						}else{
-							sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Game!");
+							MessageM.sendFMessage(p, "error.notagame", "messages", true);
 							return true;
 						}
 					}else
@@ -93,14 +93,14 @@ public class Commands implements CommandExecutor {
 					try{
 						Game = Integer.valueOf(args[1]);
 					}catch(Exception e){
-						sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena!");
+						MessageM.sendFMessage(p, "error.notagame", "messages", true);
 						return true;
 					}
 					if(Game> 0){
 						//TODO Add Vote
 						return true;
 					}else{
-						sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena!");
+						MessageM.sendFMessage(p, "error.notagame", "messages", true);
 						return true;
 					}
 				}else
@@ -110,7 +110,7 @@ public class Commands implements CommandExecutor {
 					try{
 						Game = Integer.valueOf(args[1]);
 					}catch(Exception e){
-						sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena!");
+						MessageM.sendFMessage(p, "error.notagame", "messages", true);
 						return true;
 					}
 					if(Game> 0){
@@ -169,7 +169,7 @@ public class Commands implements CommandExecutor {
 						}
 						return true;
 					}else{
-						sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena!");
+						MessageM.sendFMessage(p, "error.notagame", "messages", true);
 						return true;
 					}
 				}else
@@ -179,14 +179,14 @@ public class Commands implements CommandExecutor {
 					try{
 						Game = Integer.valueOf(args[1]);
 					}catch(Exception e){
-						sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena!");
+						MessageM.sendFMessage(p, "error.notagame", "messages", true);
 						return true;
 					}
 					if(Game> 0){
 						//TODO Make it stop the game
 						return true;
 					}else{
-						sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena!");
+						MessageM.sendFMessage(p, "error.notagame", "messages", true);
 						return true;
 					}
 				}else
@@ -197,7 +197,7 @@ public class Commands implements CommandExecutor {
 					try{
 						Game = Integer.valueOf(args[1]);
 					}catch(Exception e){
-						sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not A Valid Game Number!");
+						MessageM.sendFMessage(p, "error.notagame", "messages", true);
 						return true;
 					}
 					if(Game> 0){
@@ -230,7 +230,7 @@ public class Commands implements CommandExecutor {
 						}
 						return true;
 					}else{
-						sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not A Valid Arena Number!");
+						MessageM.sendFMessage(p, "error.notagame", "messages", true);
 						return true;
 					}
 				}else
@@ -242,7 +242,7 @@ public class Commands implements CommandExecutor {
 						Game = Integer.valueOf(args[1]);
 						Spawn = Integer.valueOf(args[2]);
 					}catch(Exception e){
-						sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena or valid tribute spawn!");
+						MessageM.sendFMessage(p, "error.notagame", "messages", true);
 						return true;
 					}
 					if(Game> 0 || Spawn> 0){
@@ -259,7 +259,7 @@ public class Commands implements CommandExecutor {
 							sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
 						return true;
 					}else{
-						sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena or valid tribute spawn");
+						MessageM.sendFMessage(p, "error.notagame", "messages", true);
 						return true;
 					}
 				}else if(args.length >= 2){
@@ -293,7 +293,7 @@ public class Commands implements CommandExecutor {
 					try{
 						Game = Integer.valueOf(args[1]);
 					}catch(Exception e){
-						sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena or valid tribute spawn!");
+						MessageM.sendFMessage(p, "error.notagame", "messages", true);
 						return true;
 					}
 					if(Game> 0){
@@ -311,7 +311,7 @@ public class Commands implements CommandExecutor {
 							sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
 						return true;
 					}else{
-						sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena or valid tribute spawn");
+						MessageM.sendFMessage(p, "error.notagame", "messages", true);
 						return true;
 					}
 				}
@@ -335,7 +335,7 @@ public class Commands implements CommandExecutor {
 					try{
 						Game = Integer.valueOf(args[1]);
 					}catch(Exception e){
-						sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena or valid tribute spawn!");
+						MessageM.sendFMessage(p, "error.notagame", "messages", true);
 						return true;
 					}
 					if(Game> 0){
@@ -353,7 +353,7 @@ public class Commands implements CommandExecutor {
 							sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
 						return true;
 					}else{
-						sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena or valid tribute spawn");
+						MessageM.sendFMessage(p, "error.notagame", "messages", true);
 						return true;
 					}
 				}
@@ -364,7 +364,7 @@ public class Commands implements CommandExecutor {
 					try{
 						Game = Integer.valueOf(args[1]);
 					}catch(Exception e){
-						sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena or valid tribute spawn!");
+						MessageM.sendFMessage(p, "error.notagame", "messages", true);
 						return true;
 					}
 					if(Game> 0){
@@ -382,7 +382,7 @@ public class Commands implements CommandExecutor {
 							sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
 						return true;
 					}else{
-						sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not An Arena or valid tribute spawn");
+						MessageM.sendFMessage(p, "error.notagame", "messages", true);
 						return true;
 					}
 				}
@@ -393,7 +393,7 @@ public class Commands implements CommandExecutor {
 						Game = Integer.valueOf(args[1]);
 						Cell = Integer.valueOf(args[2]);
 					}catch(Exception e){
-						sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not A Valid Game Number!");
+						MessageM.sendFMessage(p, "error.notagame", "messages", true);
 						return true;
 					}
 					if(Cell> 0){
@@ -421,7 +421,7 @@ public class Commands implements CommandExecutor {
 							}
 						}
 					}else{
-						sender.sendMessage(ChatColor.DARK_AQUA + "[CNR]" + ChatColor.RED + " You Silly! That's Not A Valid Arena Number!");
+						MessageM.sendFMessage(p, "error.notagame", "messages", true);
 						return true;
 					}
 				}else

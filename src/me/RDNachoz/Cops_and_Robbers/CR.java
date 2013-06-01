@@ -22,6 +22,8 @@ public class CR extends JavaPlugin {
 		W.config.setDefault("default_file", true);
 		W.spawns.setDefault("default_file", true);
 
+		W.messages.setDefault("error.notagame", "%errYou silly! That's not a game!");
+
 		W.newFiles();
 		this.getCommand("cr").setExecutor(Commands);
 		this.getServer().getPluginManager().registerEvents(CNRListener, this);
@@ -33,6 +35,7 @@ public class CR extends JavaPlugin {
 	 * Use W.spawns.getFile() to get the stuff.
 	 * If you do W.spawns.load(), it will reload the config.
 	 * Hope you understand this otherwise, revert this commit.
+	 * ~ Steffion
 	 */
 
 	public WorldEditPlugin hookWE() {
