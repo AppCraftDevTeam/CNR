@@ -27,7 +27,8 @@ public class CR extends JavaPlugin {
 		PluginDescriptionFile pdfFile = this.getDescription();
 		W.config.setDefault("default_file", true);
 		W.spawns.setDefault("default_file", true);
-
+		
+		W.messages.setDefault("error.nopermission", "%errYou don't have the permissions to do that!");
 		W.messages.setDefault("error.notagame", "%errYou silly! That's not a game!");
 
 		W.newFiles();
