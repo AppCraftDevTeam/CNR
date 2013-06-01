@@ -31,30 +31,33 @@ public class Commands implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		Player p = null;
+		if (sender instanceof Player) {
+			p = (Player) sender;
+		}
 		if(label.equalsIgnoreCase("cr") || label.equalsIgnoreCase("c") || label.equalsIgnoreCase("copsandrobbers")){
 			if (args.length == 0 || args[0].equalsIgnoreCase("help")){
-				sender.sendMessage(ChatColor.GREEN + "Cops&Robbers by " + ChatColor.DARK_AQUA + "Travja, RDNachoz, and Steffion!");
+				MessageM.sendMessage(p, "%argCops and Robbers %normby Travja, RDNachoz, and Steffion!", true);
 				if (!(sender instanceof Player) || (sender instanceof Player && ((Player) sender).hasPermission("cr.join"))){
-					sender.sendMessage(ChatColor.DARK_AQUA + "/cr join <Arena #>" + ChatColor.GOLD + " - Joins The Selected Arena");
-					sender.sendMessage(ChatColor.DARK_AQUA + "/cr leave" + ChatColor.GOLD + " - Leaves The Lobby");
+					MessageM.sendMessage(p, "%arg/cr join <Arena #>%norm - Joins the selected Arena.", false);
+					MessageM.sendMessage(p, "%arg/cr leave%norm - Leave the Lobby.", false);
 				}
 				if (!(sender instanceof Player) || (sender instanceof Player && ((Player) sender).hasPermission("cr.vote"))){
-					sender.sendMessage(ChatColor.DARK_AQUA + "/cr vote" + ChatColor.GOLD + " - Votes For Map 1-4");
+					MessageM.sendMessage(p, "%arg/cr vote%norm - Votes for Map.", false);
 				}
 				if (!(sender instanceof Player) || (sender instanceof Player && ((Player) sender).hasPermission("cr.start"))){
-					sender.sendMessage(ChatColor.DARK_AQUA + "/cr start <Game #>" + ChatColor.GOLD + " - Starts The Selected Arena");
-					sender.sendMessage(ChatColor.DARK_AQUA + "/cr stop <Game #>" + ChatColor.GOLD + " - Stops The Selected Arena");
+					MessageM.sendMessage(p, "%arg/cr start <Game #>%norm - Start the selected Arena.", false);
+					MessageM.sendMessage(p, "%arg/cr stop <Game #>%norm - Stop the selected Arena.", false);
 				}
 				if (!(sender instanceof Player) || (sender instanceof Player && ((Player) sender).hasPermission("cr.admin"))){
-					sender.sendMessage(ChatColor.DARK_AQUA + "/cr setcell <Game #> <Cell #>" + ChatColor.GOLD + " - Saves A Spawn To The Config");
-					sender.sendMessage(ChatColor.DARK_AQUA + "/cr addgame <Game #>" + ChatColor.GOLD + " - Adds and Arena to The Config");
-					sender.sendMessage(ChatColor.DARK_AQUA + "/cr setlobby <Lobby #>" + ChatColor.GOLD + " - Saves Your Surrent Postion For The Lobby");
-					sender.sendMessage(ChatColor.DARK_AQUA + "/cr setspec <Arena #>" + ChatColor.GOLD + " - Sets the Spawn For Spectators");
-					sender.sendMessage(ChatColor.DARK_AQUA + "/cr setdeadspawn" + ChatColor.GOLD + " - Sets The Spawnpoint For Dead Players");
-					sender.sendMessage(ChatColor.DARK_AQUA + "/cr setguard" + ChatColor.GOLD + " - Sets The Chest Tier For The Chest You Are Looking At");
-					sender.sendMessage(ChatColor.DARK_AQUA + "/cr saveguardinv" + ChatColor.GOLD + " - Saves All Items In Your Inventory For A Tier");
-					sender.sendMessage(ChatColor.DARK_AQUA + "/cr disable" + ChatColor.GOLD + " - Disables All Arenas");
-					sender.sendMessage(ChatColor.DARK_AQUA + "/cr enable" + ChatColor.GOLD + " - Enables All Arenas");
+					MessageM.sendMessage(p, "%arg/cr setcell <Game #> <Cell #>%norm - Save a Spawn point to the Config file.", false);
+					MessageM.sendMessage(p, "%arg/cr addgame <Game #>%norm - Add an Arena to the Config file.", false);
+					MessageM.sendMessage(p, "%arg/cr setlobby <Lobby #>%norm - Save your current postion as Arena lobby.", false);
+					MessageM.sendMessage(p, "%arg/cr setspec <Arena #>%norm - Set the spawn point for the spectators.", false);
+					MessageM.sendMessage(p, "%arg/cr setdeadspawn%norm - Set the spawn point for the dead players.", false);
+					MessageM.sendMessage(p, "%arg/cr setguard%norm - Set a chest to a Guard chest.", false);
+					MessageM.sendMessage(p, "%arg/cr saveguardinv%norm - Save your inventory as Guard inventory.", false);
+					MessageM.sendMessage(p, "%arg/cr disable%norm - Disable all Arenas.", false);
+					MessageM.sendMessage(p, "%arg/cr enable%norm - Enable all Arenas.", false);
 				}
 				return true;
 			}
