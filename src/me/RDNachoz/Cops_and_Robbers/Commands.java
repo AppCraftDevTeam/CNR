@@ -130,7 +130,7 @@ public class Commands implements CommandExecutor {
 									guard = r.nextInt(in.size());
 									p = in.get(guard);
 									try{
-										String[] coords = plugin.spawns.getString(Game + ".guardSpawn").split(",");
+										String[] coords = W.spawns.getFile().getString(Game + ".guardSpawn").split(",");
 										String world = coords[0];
 										double x = Double.parseDouble(coords[1]);
 										double y = Double.parseDouble(coords[2]);
@@ -145,11 +145,11 @@ public class Commands implements CommandExecutor {
 									}
 								}else{
 									List<Location> locs = new ArrayList<Location>();
-									if(plugin.spawns.getConfigurationSection(String.valueOf(Game))!= null){
-										Map<String, Object> temp = plugin.spawns.getConfigurationSection(String.valueOf(Game)).getValues(false);
+									if(W.spawns.getFile().getConfigurationSection(String.valueOf(Game))!= null){
+										Map<String, Object> temp = W.spawns.getFile().getConfigurationSection(String.valueOf(Game)).getValues(false);
 										for(Entry<String, Object> entry: temp.entrySet()){
-											if(plugin.spawns.getConfigurationSection(String.valueOf(Game) + "." + entry.getKey())!= null){
-												String[] coords = ((String) plugin.spawns.get(String.valueOf(Game) + "." + entry.getKey())).split(",");
+											if(W.spawns.getFile().getConfigurationSection(String.valueOf(Game) + "." + entry.getKey())!= null){
+												String[] coords = ((String) W.spawns.getFile().get(String.valueOf(Game) + "." + entry.getKey())).split(",");
 												try{
 													World world = Bukkit.getWorld(coords[0]);
 													double x = Double.parseDouble(coords[1]);
@@ -214,9 +214,9 @@ public class Commands implements CommandExecutor {
 								if(p.hasPermission("cr.setarena")){
 									Location min = sel.getMinimumPoint();
 									Location max = sel.getMaximumPoint();
-									plugin.config.set("Arena." + args[1] + ".Max", max.getWorld().getName() + "," + max.getX() + "," 
+									W.config.getFile().set("Arena." + args[1] + ".Max", max.getWorld().getName() + "," + max.getX() + "," 
 											+ max.getY() + "," + max.getZ());
-									plugin.config.set("Arena." + args[1] + ".Min", min.getWorld().getName() + "," + min.getX() + "," 
+									W.config.getFile().set("Arena." + args[1] + ".Min", min.getWorld().getName() + "," + min.getX() + "," 
 											+ min.getY() + "," + min.getZ());
 									plugin.saveConfig();
 									p.sendMessage(ChatColor.GREEN + "Arena " + ChatColor.DARK_AQUA + args[1] 
@@ -253,8 +253,8 @@ public class Commands implements CommandExecutor {
 							double y = p.getLocation().getY();
 							double z = p.getLocation().getZ();
 							String coords = w + "," + x + "," + y + "," + z;
-							plugin.spawns.set(String.valueOf(Game + "." + Spawn), coords);
-							plugin.saveSpawns();
+							W.spawns.getFile().set(String.valueOf(Game + "." + Spawn), coords);
+							W.spawns.save();
 						}else
 							sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
 						return true;
@@ -265,11 +265,11 @@ public class Commands implements CommandExecutor {
 				}else if(args.length >= 2){
 					if (sender instanceof Player){
 						p = (Player) sender;
-						if (plugin.config.get(args[1]) != null){
+						if (W.config.getFile().get(args[1]) != null){
 							int start = 1;
-							if (plugin.spawns.get(args[1]) != null)
+							if (W.spawns.getFile().get(args[1]) != null)
 								while(start<25){
-									if (plugin.spawns.get(args[1] + "." + start) != null){
+									if (W.spawns.getFile().get(args[1] + "." + start) != null){
 										start = start+1;
 									}else{
 										int loc = start;
@@ -304,8 +304,8 @@ public class Commands implements CommandExecutor {
 							double y = p.getLocation().getY();
 							double z = p.getLocation().getZ();
 							String coords = w + "," + x + "," + y + "," + z;
-							plugin.spawns.set(String.valueOf(Game + ".guardSpawn"), coords);
-							plugin.saveSpawns();
+							W.spawns.getFile().set(String.valueOf(Game + ".guardSpawn"), coords);
+							W.spawns.save();
 							sender.sendMessage(ChatColor.GREEN + "Guard Spawn Set For Arena" + args[1] + ChatColor.GREEN + "!");
 						}else
 							sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
@@ -322,8 +322,8 @@ public class Commands implements CommandExecutor {
 					PlayerInventory inv = p.getInventory();
 					ItemStack[] guarditems = inv.getContents();
 					ItemStack[] guardarmor = inv.getArmorContents();
-					plugin.config.set("Guard.Items", guarditems);
-					plugin.config.set("Guard.Armor", guardarmor);
+					W.config.getFile().set("Guard.Items", guarditems);
+					W.config.getFile().set("Guard.Armor", guardarmor);
 					plugin.saveConfig();
 					p.sendMessage(ChatColor.DARK_AQUA + "Guard" + ChatColor.GREEN + " inventory saved!");
 					return true;
@@ -346,8 +346,8 @@ public class Commands implements CommandExecutor {
 							double y = p.getLocation().getY();
 							double z = p.getLocation().getZ();
 							String coords = w + "," + x + "," + y + "," + z;
-							plugin.spawns.set(String.valueOf(Game + ".deadSpawn"), coords);
-							plugin.saveSpawns();
+							W.spawns.getFile().set(String.valueOf(Game + ".deadSpawn"), coords);
+							W.spawns.save();
 							sender.sendMessage(ChatColor.GREEN + "Dead Spawn Set!");
 						}else
 							sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
@@ -375,8 +375,8 @@ public class Commands implements CommandExecutor {
 							double y = p.getLocation().getY();
 							double z = p.getLocation().getZ();
 							String coords = w + "," + x + "," + y + "," + z;
-							plugin.spawns.set(String.valueOf(Game + ".specSpawn"), coords);
-							plugin.saveSpawns();
+							W.spawns.getFile().set(String.valueOf(Game + ".specSpawn"), coords);
+							W.spawns.save();
 							sender.sendMessage(ChatColor.GREEN + "Spectator Spawn Set!");
 						}else
 							sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
@@ -408,7 +408,7 @@ public class Commands implements CommandExecutor {
 								p.sendMessage(ChatColor.DARK_RED + "You must make a WorldEdit selection first!");
 							else{
 								if(p.hasPermission("hg.setarena")){
-									plugin.config.set("Cell." + args[2] + ".Max", p.getWorld().getName() + "," + p.getLocation().getX() + "," 
+									W.config.getFile().set("Cell." + args[2] + ".Max", p.getWorld().getName() + "," + p.getLocation().getX() + "," 
 											+ p.getLocation().getY() + "," + p.getLocation().getZ());
 									plugin.saveConfig();
 									p.sendMessage(ChatColor.GREEN + "Cell " + ChatColor.DARK_AQUA + args[2] 
@@ -435,8 +435,8 @@ public class Commands implements CommandExecutor {
 						double y = p.getLocation().getY();
 						double z = p.getLocation().getZ();
 						String coords = w + "," + x + "," + y + "," + z;
-						plugin.spawns.set("lobbySpawn", coords);
-						plugin.saveSpawns();
+						W.spawns.getFile().set("lobbySpawn", coords);
+						W.spawns.save();
 						sender.sendMessage(ChatColor.GREEN + "Lobby Spawn Set!");
 					}else
 						sender.sendMessage(ChatColor.BLUE + "This Can Only Be Sent As A Player");
