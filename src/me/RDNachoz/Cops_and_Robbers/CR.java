@@ -1,10 +1,15 @@
 package me.RDNachoz.Cops_and_Robbers;
 
 import java.util.HashMap;
+
 import me.RDNachoz.Cops_and_Robbers.Commands;
+import me.RDNachoz.Cops_and_Robbers.managers.MessageM;
+
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
@@ -18,7 +23,8 @@ public class CR extends JavaPlugin {
 
 	public Listener CNRListener = new CNRListener(this);
 
-	public void onEnable(){
+	public void onEnable() {
+		PluginDescriptionFile pdfFile = this.getDescription();
 		W.config.setDefault("default_file", true);
 		W.spawns.setDefault("default_file", true);
 
@@ -27,7 +33,16 @@ public class CR extends JavaPlugin {
 		W.newFiles();
 		this.getCommand("cr").setExecutor(Commands);
 		this.getServer().getPluginManager().registerEvents(CNRListener, this);
-		System.out.println("[CNR]" + "Cops And Robbers has been Enabled!");
+		MessageM.log("%norm%name%" + ChatColor.GREEN + ChatColor.MAGIC + " +" + "%norm" +
+				" v%version% is now Enabled.", true,
+				"name-"+pdfFile.getName(), "version-"+pdfFile.getVersion());
+	}
+
+	public void onDisable() {
+		PluginDescriptionFile pdfFile = this.getDescription();
+		MessageM.log("%norm%name%" + ChatColor.RED + ChatColor.MAGIC + " -" + "%norm" +
+				" v%version% is now Disabled.", true,
+				"name-"+pdfFile.getName(), "version-"+pdfFile.getVersion());
 	}
 
 	/*
