@@ -7,6 +7,8 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 import me.RDNachoz.Cops_and_Robbers.managers.MessageM;
+import me.RDNachoz.Cops_and_Robbers.managers.PlayerM;
+import me.RDNachoz.Cops_and_Robbers.managers.PlayerM.PType;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -37,18 +39,18 @@ public class Commands implements CommandExecutor {
 		if(label.equalsIgnoreCase("cr") || label.equalsIgnoreCase("c") || label.equalsIgnoreCase("copsandrobbers")){
 			if (args.length == 0 || args[0].equalsIgnoreCase("help")){
 				MessageM.sendMessage(p, "%argCops and Robbers %normby Travja, RDNachoz, and Steffion!", true);
-				if (!(sender instanceof Player) || (sender instanceof Player && ((Player) sender).hasPermission("cr.join"))){
+				if (PlayerM.hasPerm(p, "join", PType.PLAYER, false)) {
 					MessageM.sendMessage(p, "%arg/cr join <Arena #>%norm - Joins the selected Arena.", false);
 					MessageM.sendMessage(p, "%arg/cr leave%norm - Leave the Lobby.", false);
 				}
-				if (!(sender instanceof Player) || (sender instanceof Player && ((Player) sender).hasPermission("cr.vote"))){
+				if (PlayerM.hasPerm(p, "vote", PType.PLAYER, false)) {
 					MessageM.sendMessage(p, "%arg/cr vote%norm - Votes for Map.", false);
 				}
-				if (!(sender instanceof Player) || (sender instanceof Player && ((Player) sender).hasPermission("cr.start"))){
+				if (PlayerM.hasPerm(p, "start", PType.MODERATOR, false)) {
 					MessageM.sendMessage(p, "%arg/cr start <Game #>%norm - Start the selected Arena.", false);
 					MessageM.sendMessage(p, "%arg/cr stop <Game #>%norm - Stop the selected Arena.", false);
 				}
-				if (!(sender instanceof Player) || (sender instanceof Player && ((Player) sender).hasPermission("cr.admin"))){
+				if (PlayerM.hasPerm(p, "admin", PType.ADMIN, false)) {
 					MessageM.sendMessage(p, "%arg/cr setcell <Game #> <Cell #>%norm - Save a Spawn point to the Config file.", false);
 					MessageM.sendMessage(p, "%arg/cr addgame <Game #>%norm - Add an Arena to the Config file.", false);
 					MessageM.sendMessage(p, "%arg/cr setlobby <Lobby #>%norm - Save your current postion as Arena lobby.", false);
