@@ -17,7 +17,11 @@ public class CNRListener implements Listener {
 	@EventHandler
 	public void playerRespawn (PlayerRespawnEvent Event){
 		if(plugin.playing.containsKey(Event.getPlayer().getName())){
-			Location loc = new Location(Bukkit.getServer().getWorld(plugin.spawns.getString(plugin.playing.get(Event.getPlayer().getName()) + ".deadSpawn").split(",")[0]),Double.parseDouble(plugin.spawns.getString(plugin.playing.get(Event.getPlayer().getName()) + ".deadSpawn").split(",")[0]),Double.parseDouble(plugin.spawns.getString(plugin.playing.get(Event.getPlayer().getName()) + ".deadSpawn").split(",")[0]),Double.parseDouble(plugin.spawns.getString(plugin.playing.get(Event.getPlayer().getName()) + ".deadSpawn").split(",")[0]));
+			Location loc = new Location(
+					Bukkit.getServer().getWorld(W.spawns.getFile().getString(plugin.playing.get(Event.getPlayer().getName()) + ".deadSpawn").split(",")[0]),
+					Double.parseDouble(W.spawns.getFile().getString(plugin.playing.get(Event.getPlayer().getName()) + ".deadSpawn").split(",")[0]),
+					Double.parseDouble(W.spawns.getFile().getString(plugin.playing.get(Event.getPlayer().getName()) + ".deadSpawn").split(",")[0]),
+					Double.parseDouble(W.spawns.getFile().getString(plugin.playing.get(Event.getPlayer().getName()) + ".deadSpawn").split(",")[0]));
 			Event.setRespawnLocation (loc);
 		}
 	}
