@@ -8,7 +8,7 @@ public class PlayerM {
 	 * Made by Steffion (c) 2013.
 	 */
 	
-	public String perm = "cr.";
+	public static String main = "cr.";
 
 	public enum PType {
 		PLAYER,
@@ -30,25 +30,26 @@ public class PlayerM {
 		if (player == null) {
 			return true;
 		}
-		if (player.hasPermission(perm + perm)) {
-			return true;
-		}
 		if (type == PType.OP) {
 			if (player.isOp()) {
 				return true;
 			}
 		} else if (type == PType.ADMIN) {
-			if (player.hasPermission(perm + "admin")) {
+			if (player.hasPermission(main + "admin")) {
 				return true;
 			}
 		} else if (type == PType.MODERATOR) {
-			if (player.hasPermission(perm + "moderator")) {
+			if (player.hasPermission(main + "moderator")) {
 				return true;
 			}
 		} else if (type == PType.PLAYER) {
-			if (player.hasPermission(perm + "player")) {
+			if (player.hasPermission(main + "player")) {
 				return true;
 			}
+		}
+		
+		if (player.hasPermission(main + perm)) {
+			return true;
 		} else {
 			if (message) {
 				MessageM.sendFMessage(player, "error.nopermission", "messages", true);
