@@ -10,6 +10,7 @@ public class W {
 	public static ArrayList<String> newFiles = new ArrayList<String>();
 	public static ConfigM config = new ConfigM("config");
 	public static ConfigM spawns = new ConfigM("spawns");
+	public static ConfigM messages = new ConfigM("messages");
 
 	public static void newFiles() {
 		for (String Filename : newFiles) {
