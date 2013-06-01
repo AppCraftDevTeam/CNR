@@ -9,6 +9,7 @@ import me.RDNachoz.Cops_and_Robbers.managers.MessageM;
 public class W {
 	public static ArrayList<String> newFiles = new ArrayList<String>();
 	public static ConfigM config = new ConfigM("config");
+	public static ConfigM spawns = new ConfigM("spawns");
 
 	public static void newFiles() {
 		for (String Filename : newFiles) {
